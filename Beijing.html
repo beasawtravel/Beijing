@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Beijing 2026 | Visual Pro</title>
+    <style>
+        :root {
+            --ios-blue: #0A84FF;
+            --ios-bg: #000000;
+            --card-bg: #1C1C1E;
+            --nav-bg: #121212;
+            --text-main: #FFFFFF;
+            --text-sub: #8E8E93;
+            --border: #38383A;
+            --tag-snack: #32D74B; 
+            --tag-dining: #FF9F0A; 
+            --tag-souvenir: #BF5AF2;
+            --tag-important: #FF453A;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            background-color: var(--ios-bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 85px;
+            background: var(--nav-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: env(safe-area-inset-top, 20px);
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: var(--text-sub);
+            text-decoration: none;
+            margin-bottom: 20px;
+            width: 100%;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 10px 0;
+        }
+
+        .nav-item.active {
+            color: var(--ios-blue);
+            background: rgba(10, 132, 255, 0.15);
+            border-left: 4px solid var(--ios-blue);
+        }
+
+        .nav-item i { display: block; font-size: 22px; font-weight: 700; margin-bottom: 2px; }
+        .nav-item span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            padding-top: env(safe-area-inset-top, 20px);
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            background: radial-gradient(circle at top right, #1c1c1e, #000000);
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            letter-spacing: -0.8px;
+        }
+
+        /* Fluid Transitions */
+        .tab-content { display: none; opacity: 0; transform: scale(0.98) translateY(10px); transition: all 0.5s ease; }
+        .tab-content.active { 
+            display: block; 
+            animation: ios-entrance 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+
+        @keyframes ios-entrance {
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Weather Forecast Widget */
+        .weather-grid {
+            background: rgba(44, 44, 46, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .weather-main { grid-column: span 2; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 5px; }
+        .weather-detail { font-size: 14px; color: var(--text-sub); }
+        .weather-detail strong { color: #fff; }
+
+        /* Content Cards & Images */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: calc(100% + 40px);
+            margin: -20px -20px 15px -20px;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .thumb-group {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .thumb-item {
+            flex: 0 0 100px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        h2 { margin: 0 0 8px 0; font-size: 20px; font-weight: 700; color: var(--ios-blue); }
+        p { margin: 8px 0; font-size: 15px; line-height: 1.5; color: #E5E5E7; }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            color: white;
+            margin: 4px 4px 4px 0;
+            text-transform: uppercase;
+        }
+
+        .btn-map {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--ios-blue);
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .btn-map:active { transform: scale(0.97); opacity: 0.9; }
+
+        hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<nav id="sidebar">
+    <a href="#" class="nav-item active" onclick="showTab('info', this)"><i>ℹ️</i><span>Info</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day1', this)"><i>05</i><span>Apr</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day2', this)"><i>06</i><span>Apr</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day3', this)"><i>07</i><span>Apr</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day4', this)"><i>08</i><span>Apr</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day5', this)"><i>09</i><span>Apr</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day6', this)"><i>10</i><span>Apr</span></a>
+    <a href="#" class="nav-item" onclick="showTab('day7', this)"><i>11</i><span>Apr</span></a>
+</nav>
+
+<main>
+    <div id="current-header" class="header-title">Travel Essentials</div>
+
+    <div id="info" class="tab-content active">
+        <div class="card" style="border-left: 6px solid var(--ios-blue);">
+            <h2>✈️ Flight Details</h2>
+            <p><strong>Arrive:</strong> Apr 5 | PEK T3 @ 22:25</p>
+            <p><strong>Depart:</strong> Apr 12 | PKX @ 13:15</p>
+            <p><span class="tag" style="background:var(--tag-important)">Daxing (PKX)</span> Remember PKX is south of the city!</p>
+        </div>
+        <div class="card">
+            <h2>🚨 Quick Contacts</h2>
+            <p><b>Police:</b> 110 | <b>Ambulance:</b> 120</p>
+            <p><b>Global SOS Beijing:</b> +86 10 6462 9100</p>
+        </div>
+    </div>
+
+    <div id="day1" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Night Arrival</strong></div>
+                <div style="font-size: 24px;">11°C 🌙</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>42%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>5%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/2027186323646865182_0" class="card-img" alt="PEK Airport">
+            <h2>Welcome to Beijing</h2>
+            <p>Direct transfer from Capital Airport (PEK) to your hotel center stay.</p>
+            <a href="https://www.google.com/maps/search/PEK+Airport" class="btn-map">📍 Open Airport Map</a>
+        </div>
+    </div>
+
+    <div id="day2" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Sunny & Breezy</strong></div>
+                <div style="font-size: 24px;">18°C ☀️</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>30%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>2%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/8025470125103940685_0" class="card-img" alt="Great Wall">
+            <h2>The Great Wall</h2>
+            <p>Hiking Mutianyu and the Olympic Park stops.</p>
+            <div class="thumb-group">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/3354464259849995930_0" class="thumb-item" alt="Olympic Park">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/4137674585331732136_0" class="thumb-item" alt="Roast Duck">
+            </div>
+            <p><span class="tag" style="background:var(--tag-dining)">DINING</span> <b>Xinrongji:</b> High-end seafood and local dishes.</p>
+            <a href="https://www.google.com/maps/search/Mutianyu+Great+Wall" class="btn-map">📍 Navigate to Wall</a>
+        </div>
+    </div>
+
+    <div id="day3" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Clear Imperial Skies</strong></div>
+                <div style="font-size: 24px;">21°C 🌤️</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>34%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>8%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/12088453249176772787_0" class="card-img" alt="Forbidden City">
+            <h2>Forbidden City</h2>
+            <div class="thumb-group">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/8119870159486319473_0" class="thumb-item" alt="Tanghulu">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/7377865792994586180_0" class="thumb-item" alt="Rolling Donkey">
+            </div>
+            <p><span class="tag" style="background:var(--tag-snack)">SNACK</span> <b>Tanghulu:</b> Candied Hawthorn sticks.</p>
+            <p><span class="tag" style="background:var(--tag-dining)">MENU</span> <b>Siji Minfu:</b> Duck dipping sugar, 'Rolling Donkey' cake.</p>
+            <a href="https://www.google.com/maps/search/Forbidden+City" class="btn-map">📍 Open Forbidden City</a>
+        </div>
+    </div>
+
+    <div id="day4" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Mild & Cloudy</strong></div>
+                <div style="font-size: 24px;">20°C ⛅</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>38%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>12%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/9666025389030019613_0" class="card-img" alt="Universal">
+            <h2>Universal Studios</h2>
+            <p>Full-day immersive theme park adventure.</p>
+            <p><span class="tag" style="background:var(--tag-snack)">FAMOUS</span> Butterbeer & Minion Treats.</p>
+            <a href="https://www.google.com/maps/search/Universal+Studios+Beijing" class="btn-map">📍 Navigate to Universal</a>
+        </div>
+    </div>
+
+    <div id="day5" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Perfect Spring Day</strong></div>
+                <div style="font-size: 24px;">20°C 🌿</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>40%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>10%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/16880435204432596749_0" class="card-img" alt="Temple of Heaven">
+            <h2>Imperial Rituals</h2>
+            <p>Temple of Heaven + Red Theater Kung Fu Show.</p>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/2199451596999892369_0" class="thumb-item" style="width:100%; height:120px; object-fit:cover; margin-top:10px;" alt="Kung Fu Show">
+            <p><span class="tag" style="background:var(--tag-dining)">DINING</span> <b>Bianyifang:</b> The original 'Closed-Oven' duck house.</p>
+            <a href="https://www.google.com/maps/search/Red+Theater+Beijing" class="btn-map">📍 Go to Red Theater</a>
+        </div>
+    </div>
+
+    <div id="day6" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Warm & Clear</strong></div>
+                <div style="font-size: 24px;">23°C 🛶</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>45%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>8%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/5864121114579262805_0" class="card-img" alt="Summer Palace">
+            <h2>Royal Retreat</h2>
+            <p>Summer Palace and seeing Pandas at the Zoo.</p>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/16093074028915020553_0" class="thumb-item" style="width:100%; height:120px; object-fit:cover; margin-top:10px;" alt="Panda House">
+            <p><span class="tag" style="background:var(--tag-snack)">SNACK</span> Old Beijing Jar Yogurt near Lama Temple.</p>
+            <a href="https://www.google.com/maps/search/Beijing+Zoo+Panda+House" class="btn-map">📍 Go to Summer Palace</a>
+        </div>
+    </div>
+
+    <div id="day7" class="tab-content">
+        <div class="weather-grid">
+            <div class="weather-main">
+                <div><strong>Mild Farewell</strong></div>
+                <div style="font-size: 24px;">20°C 🛍️</div>
+            </div>
+            <div class="weather-detail">💧 Humidity: <strong>41%</strong></div>
+            <div class="weather-detail">☔ Rain: <strong>15%</strong></div>
+        </div>
+        <div class="card">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/4718948498354099497_0" class="card-img" alt="Sanlitun">
+            <h2>Sanlitun Style</h2>
+            <div class="thumb-group">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/10037463422003268167_0" class="thumb-item" alt="Silk">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/8201524759164022891_0" class="thumb-item" alt="Jasmine Tea">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/133333172394401181_0" class="thumb-item" alt="Scrub Cake">
+            </div>
+            <p><span class="tag" style="background:var(--tag-souvenir)">SOUVENIR</span> Silk & Jasmine Tea.</p>
+            <p><span class="tag" style="background:var(--tag-snack)">TRENDY</span> <b>Scrub Sponge Cake</b> (Viral viral viral!).</p>
+            <a href="https://www.google.com/maps/search/Taikoo+Li+Sanlitun" class="btn-map">📍 Explore Sanlitun</a>
+        </div>
+    </div>
+</main>
+
+<script>
+    function showTab(tabId, element) {
+        const currentActive = document.querySelector('.tab-content.active');
+        if (currentActive) {
+            currentActive.style.opacity = '0';
+            currentActive.style.transform = 'scale(0.95)';
+            setTimeout(() => { currentActive.classList.remove('active'); }, 200);
+        }
+
+        setTimeout(() => {
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+            
+            const navItems = document.getElementsByClassName('nav-item');
+            for (let i = 0; i < navItems.length; i++) navItems[i].classList.remove('active');
+            
+            const newTab = document.getElementById(tabId);
+            newTab.classList.add('active');
+            element.classList.add('active');
+            
+            const titles = {
+                'info': 'Logistics & Tips', 'day1': 'Day 1: Arrival',
+                'day2': 'Day 2: Great Wall', 'day3': 'Day 3: Palace',
+                'day4': 'Day 4: Universal', 'day5': 'Day 5: Kung Fu',
+                'day6': 'Day 6: Royal Garden', 'day7': 'Day 7: Farewell'
+            };
+            document.getElementById('current-header').innerText = titles[tabId];
+            document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+        }, 220);
+    }
+</script>
+
+</body>
+</html>
