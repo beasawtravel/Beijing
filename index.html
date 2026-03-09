@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Beijing 2026 | Premium Itinerary</title>
+    <title>Beijing 2026 | Master Scrapbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ios-blue: #0A84FF;
-            --ios-bg: radial-gradient(circle at 50% 0%, #1c1c1e 0%, #000000 100%);
-            --card-bg: rgba(28, 28, 30, 0.8);
+            --ios-blue: #5AC8FA;
+            --ios-bg: linear-gradient(135deg, #0f0f11 0%, #1a1a1c 100%);
+            --card-bg: rgba(35, 35, 38, 0.9);
             --nav-bg: #121212;
             --text-main: #FFFFFF;
-            --text-sub: #8E8E93;
-            --border: rgba(255, 255, 255, 0.1);
-            --tag-snack: #32D74B; 
-            --tag-dining: #FF9F0A; 
-            --tag-souvenir: #BF5AF2;
-            --tag-important: #FF453A;
+            --text-sub: #A1A1A6;
+            --border: rgba(255, 255, 255, 0.15);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            font-family: 'Gaegu', cursive;
             background: var(--ios-bg);
             color: var(--text-main);
             margin: 0;
             display: flex;
             height: 100vh;
             overflow: hidden;
+            font-size: 18px;
         }
 
         /* Sidebar Navigation */
         nav {
-            width: 75px;
+            width: 85px;
             background: var(--nav-bg);
             border-right: 1px solid var(--border);
             display: flex;
@@ -39,7 +37,7 @@
             align-items: center;
             padding-top: 30px;
             flex-shrink: 0;
-            z-index: 9999;
+            z-index: 10;
         }
 
         .nav-item {
@@ -49,248 +47,190 @@
             width: 100%;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
-            transition: color 0.3s ease;
         }
 
-        .nav-item.active { color: var(--ios-blue); font-weight: bold; }
-        .nav-item i { display: block; font-size: 20px; margin-bottom: 2px; font-style: normal; }
-        .nav-item span { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-item.active { color: var(--ios-blue); transform: scale(1.1); }
+        .nav-item i { display: block; font-size: 26px; margin-bottom: 2px; font-style: normal; }
+        .nav-item span { font-size: 12px; font-weight: 700; text-transform: uppercase; }
 
-        /* Main Content & Transitions */
-        main { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding: 20px; 
-            -webkit-overflow-scrolling: touch; 
-            perspective: 1000px;
-        }
-
+        /* Main Area & Transitions */
+        main { flex: 1; overflow-y: auto; padding: 20px; -webkit-overflow-scrolling: touch; }
+        
         .tab-content { 
             display: none; 
-            animation: slideIn 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease-out;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .tab-content.active { display: block; opacity: 1; transform: translateY(0); }
 
-        .tab-content.active { display: block; }
+        /* 24h Weather Widget */
+        .weather-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px dashed var(--border); }
+        .weather-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .weather-scroll::-webkit-scrollbar { display: none; }
+        .hour-box { flex: 0 0 55px; text-align: center; }
+        .hour-time { font-size: 12px; color: var(--text-sub); }
+        .hour-icon { font-size: 20px; margin: 4px 0; }
+        .hour-temp { font-size: 15px; font-weight: 700; }
 
-        /* Hourly Weather Widget */
-        .weather-hourly {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .weather-hourly::-webkit-scrollbar { display: none; }
-
-        .hour-box {
-            flex: 0 0 60px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 10px 5px;
-            text-align: center;
-        }
-        .hour-box span { display: block; font-size: 11px; color: var(--text-sub); }
-        .hour-box .hour-temp { font-size: 14px; font-weight: bold; color: #fff; margin-top: 5px; }
-        .hour-box .hour-icon { font-size: 18px; margin: 5px 0; }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .card-img { width: 100%; height: 200px; object-fit: cover; background: #222; }
+        /* Card Styles */
+        .card { background: var(--card-bg); border-radius: 12px; margin-bottom: 25px; border: 2px solid var(--border); box-shadow: 6px 6px 0px rgba(0,0,0,0.4); overflow: hidden; }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
         .card-body { padding: 18px; }
 
-        h2 { margin: 0 0 10px; font-size: 22px; color: var(--ios-blue); }
-        h3 { margin: 15px 0 5px; font-size: 16px; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
-        p { font-size: 14px; color: #D1D1D6; line-height: 1.5; margin: 5px 0; }
+        h2 { margin: 0 0 10px; font-size: 26px; color: var(--ios-blue); text-decoration: underline; }
+        h3 { margin: 15px 0 5px; font-size: 18px; color: #fff; border-bottom: 1px solid var(--border); }
+        p { font-size: 17px; line-height: 1.4; margin: 5px 0; }
 
-        .tag { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: bold; color: white; margin: 5px 5px 0 0; }
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 15px; font-size: 13px; font-weight: bold; color: #000; background: #FFD60A; margin: 8px 5px 0 0; }
         
         .gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
-        .gallery-item { flex: 0 0 110px; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-        .gallery-item img { width: 110px; height: 80px; object-fit: cover; }
-        .gallery-label { font-size: 9px; text-align: center; padding: 4px; color: #fff; }
+        .gallery-item { flex: 0 0 100px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+        .gallery-item img { width: 100px; height: 75px; object-fit: cover; }
+        .gallery-label { font-size: 11px; text-align: center; background: #000; color: #fff; padding: 2px; }
 
-        .btn-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(44, 44, 46, 0.8);
-            color: var(--ios-blue);
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 15px;
-            border: 1px solid var(--border);
-        }
+        .btn-nav { display: block; text-align: center; background: #fff; color: #000; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 16px; font-weight: 700; margin-top: 15px; border: 2px solid #000; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="nav-item active" onclick="showTab('info', this)"><i>ℹ️</i><span>Info</span></div>
-    <div class="nav-item" onclick="showTab('day1', this)"><i>05</i><span>Apr</span></div>
-    <div class="nav-item" onclick="showTab('day2', this)"><i>06</i><span>Apr</span></div>
-    <div class="nav-item" onclick="showTab('day3', this)"><i>07</i><span>Apr</span></div>
-    <div class="nav-item" onclick="showTab('day4', this)"><i>08</i><span>Apr</span></div>
-    <div class="nav-item" onclick="showTab('day5', this)"><i>09</i><span>Apr</span></div>
-    <div class="nav-item" onclick="showTab('day6', this)"><i>10</i><span>Apr</span></div>
-    <div class="nav-item" onclick="showTab('day7', this)"><i>11</i><span>Apr</span></div>
+    <div class="nav-item active" onclick="showTab('info', this)"><i>🏠</i><span>Home</span></div>
+    <div class="nav-item" onclick="showTab('day1', this)"><i>✈️</i><span>Apr 5</span></div>
+    <div class="nav-item" onclick="showTab('day2', this)"><i>🏯</i><span>Apr 6</span></div>
+    <div class="nav-item" onclick="showTab('day3', this)"><i>🐉</i><span>Apr 7</span></div>
+    <div class="nav-item" onclick="showTab('day4', this)"><i>🎢</i><span>Apr 8</span></div>
+    <div class="nav-item" onclick="showTab('day5', this)"><i>⛩️</i><span>Apr 9</span></div>
+    <div class="nav-item" onclick="showTab('day6', this)"><i>🐼</i><span>Apr 10</span></div>
+    <div class="nav-item" onclick="showTab('day7', this)"><i>🛍️</i><span>Apr 11</span></div>
 </nav>
 
 <main>
     <div id="info" class="tab-content active">
         <h2>Trip Overview</h2>
-        
-        <div class="weather-hourly">
-            <div class="hour-box"><span>Now</span><div class="hour-icon">☀️</div><div class="hour-temp">18°</div></div>
-            <div class="hour-box"><span>1PM</span><div class="hour-icon">☀️</div><div class="hour-temp">20°</div></div>
-            <div class="hour-box"><span>2PM</span><div class="hour-icon">🌤️</div><div class="hour-temp">21°</div></div>
-            <div class="hour-box"><span>3PM</span><div class="hour-icon">🌤️</div><div class="hour-temp">21°</div></div>
-            <div class="hour-box"><span>4PM</span><div class="hour-icon">🌥️</div><div class="hour-temp">19°</div></div>
-            <div class="hour-box"><span>5PM</span><div class="hour-icon">🌥️</div><div class="hour-temp">17°</div></div>
+        <div class="weather-section">
+            <p style="margin:0 0 10px 0; font-size:16px;">☁️ 24h Beijing Forecast</p>
+            <div class="weather-scroll" id="weatherScroll"></div>
         </div>
-
         <div class="card">
             <div class="card-body">
-                <h3>✈️ Logistics</h3>
-                <p><strong>Arrive:</strong> Apr 5 (PEK) @ 22:25</p>
-                <p><strong>Depart:</strong> Apr 12 (PKX) @ 13:15</p>
-                <p><span class="tag" style="background:var(--tag-important)">NOTICE</span> Departure is from Daxing (PKX).</p>
-                
-                <h3 style="color: #FF453A;">🚨 Emergency</h3>
-                <p><strong>Police:</strong> 110 | <strong>Ambulance:</strong> 120</p>
-                <p><strong>Global SOS:</strong> +86 10 6462 9100</p>
+                <h3>✈️ Flights</h3>
+                <p><strong>Arrive:</strong> Apr 5 @ 22:25 (PEK)</p>
+                <p><strong>Depart:</strong> Apr 12 @ 13:15 (PKX)</p>
+                <h3>🚨 Emergency</h3>
+                <p>Police: 110 | SOS: +86 10 6462 9100</p>
             </div>
         </div>
     </div>
 
     <div id="day1" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1543896512-3f14004944fc?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1543896512-3f14004944fc?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 5: Arrival</h2>
+                <h2>Arrival</h2>
                 <p>Landing at PEK Capital Airport. Didi to hotel for rest.</p>
-                <a href="https://maps.google.com/?q=Beijing+Capital+International+Airport" class="btn-nav">📍 Map: Capital Airport</a>
+                <a href="https://www.google.com/maps/search/Beijing+Capital+International+Airport" class="btn-nav">📍 Map: Capital Airport</a>
             </div>
         </div>
     </div>
 
     <div id="day2" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 6: Great Wall</h2>
-                <p>Mutianyu section and the famous toboggan ride.</p>
-                <p><span class="tag" style="background:var(--tag-dining)">FINE DINING</span> <b>Xinrongji:</b> High-end local cuisine.</p>
-                <a href="https://maps.google.com/?q=Mutianyu+Great+Wall" class="btn-nav">📍 Map: Great Wall</a>
+                <h2>Great Wall</h2>
+                <p>Mutianyu section + Toboggan ride down!</p>
+                <span class="tag">🍴 Xinrongji Dining</span>
+                <a href="https://www.google.com/maps/search/Mutianyu+Great+Wall" class="btn-nav">📍 Map: Great Wall</a>
             </div>
         </div>
     </div>
 
     <div id="day3" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1547984609-9a8a7c457382?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1547984609-9a8a7c457382?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 7: Forbidden City</h2>
-                <p>Imperial Palace exploration.</p>
-                <h3>🍢 Must-Try Snacks</h3>
+                <h2>Forbidden City</h2>
+                <p>Imperial Palace & Jingshan Park views.</p>
+                <h3>🍢 Snacks</h3>
                 <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300">
-                        <div class="gallery-label">Tanghulu</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?auto=format&fit=crop&w=300">
-                        <div class="gallery-label">Peking Duck</div>
-                    </div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=200"><div class="gallery-label">Tanghulu</div></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=200"><div class="gallery-label">Duck</div></div>
                 </div>
-                <a href="https://maps.google.com/?q=Forbidden+City" class="btn-nav">📍 Map: Palace</a>
+                <a href="https://www.google.com/maps/search/Forbidden+City" class="btn-nav">📍 Map: Palace</a>
             </div>
         </div>
     </div>
 
     <div id="day4" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1621259182978-f09e5e2ca845?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1621259182978-f09e5e2ca845?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 8: Universal Studios</h2>
-                <p>Full day at the theme park resort.</p>
-                <a href="https://maps.google.com/?q=Universal+Studios+Beijing" class="btn-nav">📍 Map: Universal</a>
+                <h2>Universal Studios</h2>
+                <p>Full day of movie magic and rides.</p>
+                <a href="https://www.google.com/maps/search/Universal+Studios+Beijing" class="btn-nav">📍 Map: Universal</a>
             </div>
         </div>
     </div>
 
     <div id="day5" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1583248352195-d3a8e766ede2?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1583248352195-d3a8e766ede2?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 9: Temple of Heaven</h2>
-                <p>Imperial sacrificial temple and evening Kung Fu show.</p>
-                <a href="https://maps.google.com/?q=Temple+of+Heaven" class="btn-nav">📍 Map: Temple</a>
+                <h2>Temple of Heaven</h2>
+                <p>Sacrificial temple + Kung Fu show.</p>
+                <a href="https://www.google.com/maps/search/Temple+of+Heaven" class="btn-nav">📍 Map: Temple</a>
             </div>
         </div>
     </div>
 
     <div id="day6" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1564349683136-77e08bef1ed1?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1564349683136-77e08bef1ed1?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 10: Pandas & Palace</h2>
-                <p>Beijing Zoo (Giant Pandas) and Summer Palace.</p>
-                <a href="https://maps.google.com/?q=Beijing+Zoo+Panda+House" class="btn-nav">📍 Map: Zoo</a>
+                <h2>Pandas & Palace</h2>
+                <p>Beijing Zoo & Summer Palace boat ride.</p>
+                <a href="https://www.google.com/maps/search/Beijing+Zoo+Panda" class="btn-nav">📍 Map: Zoo</a>
             </div>
         </div>
     </div>
 
     <div id="day7" class="tab-content">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1510484724033-6a3f019036f0?auto=format&fit=crop&q=80&w=1000" class="card-img">
+            <img src="https://images.unsplash.com/photo-1510484724033-6a3f019036f0?w=800" class="card-img">
             <div class="card-body">
-                <h2>Apr 11: Sanlitun</h2>
-                <p>Modern shopping and farewell dinner.</p>
-                <h3>🎁 Souvenirs</h3>
+                <h2>Sanlitun Shopping</h2>
+                <p>Souvenirs and farewell dinner.</p>
+                <h3>🎁 Gifts</h3>
                 <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1516050748083-f03ee0bb22b1?auto=format&fit=crop&w=300">
-                        <div class="gallery-label">Tea Sets</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1518173946684-3ee11bd75a75?auto=format&fit=crop&w=300">
-                        <div class="gallery-label">Silk Scarf</div>
-                    </div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1516050748083-f03ee0bb22b1?w=200"><div class="gallery-label">Tea Sets</div></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1518173946684-3ee11bd75a75?w=200"><div class="gallery-label">Silk</div></div>
                 </div>
-                <a href="https://maps.google.com/?q=Sanlitun+Village" class="btn-nav">📍 Map: Sanlitun</a>
+                <a href="https://www.google.com/maps/search/Sanlitun" class="btn-nav">📍 Map: Sanlitun</a>
             </div>
         </div>
     </div>
 </main>
 
 <script>
+    // Build 24h weather
+    const scroll = document.getElementById('weatherScroll');
+    const icons = ['☀️', '🌤️', '☁️', '🌧️'];
+    for(let i=0; i<24; i++) {
+        const h = i % 12 || 12;
+        const ampm = i < 12 ? 'AM' : 'PM';
+        scroll.innerHTML += `<div class="hour-box"><div class="hour-time">${h}${ampm}</div><div class="hour-icon">${icons[i%4]}</div><div class="hour-temp">${15+(i%5)}°</div></div>`;
+    }
+
     function showTab(tabId, element) {
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display='none'; });
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         const target = document.getElementById(tabId);
-        if(target) target.classList.add('active');
+        target.style.display='block';
+        setTimeout(() => target.classList.add('active'), 10);
         element.classList.add('active');
-        document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelector('main').scrollTo({top:0, behavior:'smooth'});
     }
 </script>
 </body>
