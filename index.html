@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Beijing 2026 | Ultimate Pro</title>
+    <title>Beijing 2026 | Master Itinerary</title>
     <style>
         :root {
             --ios-blue: #0A84FF;
@@ -15,6 +15,7 @@
             --border: #38383A;
             --tag-snack: #32D74B; 
             --tag-dining: #FF9F0A; 
+            --tag-souvenir: #BF5AF2;
             --tag-important: #FF453A;
         }
 
@@ -28,7 +29,6 @@
             overflow: hidden;
         }
 
-        /* Fixed Sidebar Navigation */
         nav {
             width: 75px;
             background: var(--nav-bg);
@@ -54,16 +54,9 @@
         .nav-item i { display: block; font-size: 20px; margin-bottom: 2px; font-style: normal; }
         .nav-item span { font-size: 9px; text-transform: uppercase; }
 
-        /* Main Content */
-        main {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            -webkit-overflow-scrolling: touch;
-            z-index: 1;
-        }
-
-        .header-title { font-size: 26px; font-weight: 800; margin-bottom: 20px; color: var(--ios-blue); }
+        main { flex: 1; overflow-y: auto; padding: 20px; -webkit-overflow-scrolling: touch; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         .card {
             background: var(--card-bg);
@@ -73,16 +66,20 @@
             overflow: hidden;
         }
 
-        .card-img { width: 100%; height: 200px; object-fit: cover; background: #333; display: block; }
+        .card-img { width: 100%; height: 200px; object-fit: cover; background: #222; }
         .card-body { padding: 18px; }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        h2 { margin: 0 0 10px; font-size: 22px; color: var(--ios-blue); }
+        h3 { margin: 15px 0 5px; font-size: 16px; color: #fff; }
+        p { font-size: 14px; color: #D1D1D6; line-height: 1.5; margin: 5px 0; }
 
-        h2 { margin: 0 0 10px; font-size: 22px; color: #fff; }
-        p { font-size: 15px; color: #D1D1D6; line-height: 1.5; margin: 8px 0; }
+        .tag { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: bold; color: white; margin: 5px 5px 0 0; }
+        
+        .gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
+        .gallery-item { flex: 0 0 110px; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+        .gallery-item img { width: 110px; height: 80px; object-fit: cover; }
+        .gallery-label { font-size: 9px; text-align: center; padding: 4px; color: #fff; }
 
-        /* Navigation Buttons */
         .btn-nav {
             display: flex;
             align-items: center;
@@ -90,15 +87,13 @@
             background: #2C2C2E;
             color: var(--ios-blue);
             text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
             font-weight: 600;
             margin-top: 15px;
             border: 1px solid var(--border);
         }
-
-        .tag { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: bold; color: white; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -115,111 +110,88 @@
 </nav>
 
 <main>
-    <div id="header-text" class="header-title">Trip Overview</div>
-
     <div id="info" class="tab-content active">
+        <h2>Trip Overview</h2>
         <div class="card">
             <div class="card-body">
-                <h2>✈️ Logistics</h2>
-                <p><strong>Apr 5:</strong> Land PEK T3 @ 22:25</p>
-                <p><strong>Apr 12:</strong> Depart PKX @ 13:15</p>
-                <p><span class="tag" style="background:var(--tag-important)">AIRPORT NOTICE</span> You leave from the "Starfish" (Daxing) airport.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="day1" class="tab-content">
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Beijing_Capital_International_Airport_at_Night.jpg/640px-Beijing_Capital_International_Airport_at_Night.jpg" class="card-img">
-            <div class="card-body">
-                <h2>Arrival at Capital</h2>
-                <p>Late night arrival. Use the Didi app for a smooth ride to your hotel.</p>
-                <a href="https://www.google.com/maps/search/Beijing+Capital+International+Airport" class="btn-nav">📍 Map: Capital Airport</a>
+                <h3>✈️ Logistics</h3>
+                <p><strong>Arrive:</strong> Apr 5 (PEK) @ 22:25</p>
+                <p><strong>Depart:</strong> Apr 12 (PKX) @ 13:15</p>
+                <p><span class="tag" style="background:var(--tag-important)">NOTICE</span> Departure is from Daxing (PKX).</p>
+                
+                <h3 style="color: #FF453A;">🚨 Emergency</h3>
+                <p><strong>Police:</strong> 110</p>
+                <p><strong>Ambulance:</strong> 120</p>
+                <p><strong>Global SOS:</strong> +86 10 6462 9100</p>
             </div>
         </div>
     </div>
 
     <div id="day2" class="tab-content">
         <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Mutianyu_-_Navin7_-_001.jpg/640px-The_Great_Wall_of_China_at_Mutianyu_-_Navin7_-_001.jpg" class="card-img">
+            <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600" class="card-img">
             <div class="card-body">
-                <h2>Mutianyu Great Wall</h2>
-                <p>Experience the world's most famous wall and take the toboggan down.</p>
-                <a href="https://www.google.com/maps/search/Mutianyu+Great+Wall" class="btn-nav">📍 Map: Mutianyu Section</a>
+                <h2>Great Wall (Mutianyu)</h2>
+                <p>Ride the toboggan down! Experience refined flavors for dinner.</p>
+                <p><span class="tag" style="background:var(--tag-dining)">DINING</span> <b>Xinrongji:</b> High-end local food.</p>
+                <a href="https://www.google.com/maps/search/Mutianyu+Great+Wall" class="btn-nav">📍 Map to Great Wall</a>
             </div>
         </div>
     </div>
 
     <div id="day3" class="tab-content">
         <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/The_Forbidden_City_Beijing.JPG/640px-The_Forbidden_City_Beijing.JPG" class="card-img">
+            <img src="https://images.unsplash.com/photo-1547984609-9a8a7c457382?w=600" class="card-img">
             <div class="card-body">
                 <h2>Forbidden City</h2>
-                <p>The heart of imperial China. Wear comfortable shoes!</p>
-                <a href="https://www.google.com/maps/search/Forbidden+City" class="btn-nav">📍 Map: Forbidden City</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="day4" class="tab-content">
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Universal_Studios_Beijing_Globe.jpg/640px-Universal_Studios_Beijing_Globe.jpg" class="card-img">
-            <div class="card-body">
-                <h2>Universal Studios</h2>
-                <p>Check out the Minion Land and the Wizarding World.</p>
-                <a href="https://www.google.com/maps/search/Universal+Studios+Beijing" class="btn-nav">📍 Map: Universal Resort</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="day5" class="tab-content">
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Hall_of_Prayer_for_Good_Harvests.JPG/640px-Hall_of_Prayer_for_Good_Harvests.JPG" class="card-img">
-            <div class="card-body">
-                <h2>Temple of Heaven</h2>
-                <p>Visit early to see local residents practicing Tai Chi in the park.</p>
-                <a href="https://www.google.com/maps/search/Temple+of+Heaven" class="btn-nav">📍 Map: Temple of Heaven</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="day6" class="tab-content">
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/640px-Grosser_Panda.JPG" class="card-img">
-            <div class="card-body">
-                <h2>Beijing Zoo (Pandas)</h2>
-                <p>Head straight to the Panda House as soon as the gates open.</p>
-                <a href="https://www.google.com/maps/search/Beijing+Zoo+Panda+House" class="btn-nav">📍 Map: Panda House</a>
+                <p>Explore the heart of the Empire.</p>
+                <h3>🍢 Must-Try Snacks</h3>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=300">
+                        <div class="gallery-label">Tanghulu</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=300">
+                        <div class="gallery-label">Peking Duck</div>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/search/Forbidden+City" class="btn-nav">📍 Map to Palace</a>
             </div>
         </div>
     </div>
 
     <div id="day7" class="tab-content">
         <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Sanlitun_Village_2013.jpg/640px-Sanlitun_Village_2013.jpg" class="card-img">
+            <img src="https://images.unsplash.com/photo-1510484724033-6a3f019036f0?w=600" class="card-img">
             <div class="card-body">
-                <h2>Sanlitun Shopping</h2>
-                <p>Perfect for your final night. Dinner and high-end shopping.</p>
-                <a href="https://www.google.com/maps/search/Sanlitun+Taikoo+Li" class="btn-nav">📍 Map: Sanlitun Village</a>
+                <h2>Sanlitun & Shopping</h2>
+                <p>High-end shopping and souvenirs.</p>
+                <h3>🎁 Souvenirs</h3>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1516050748083-f03ee0bb22b1?w=300">
+                        <div class="gallery-label">Tea Sets</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1518173946684-3ee11bd75a75?w=300">
+                        <div class="gallery-label">Silk Scarf</div>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/search/Sanlitun" class="btn-nav">📍 Map to Sanlitun</a>
             </div>
         </div>
     </div>
-</main>
+
+    </main>
 
 <script>
     function showTab(tabId, element) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
+        const target = document.getElementById(tabId);
+        if(target) target.classList.add('active');
         element.classList.add('active');
-        
-        const titles = {
-            'info': 'Trip Overview', 'day1': 'Apr 5: Arrival', 
-            'day2': 'Apr 6: Great Wall', 'day3': 'Apr 7: Palace',
-            'day4': 'Apr 8: Universal', 'day5': 'Apr 9: Temple',
-            'day6': 'Apr 10: Pandas', 'day7': 'Apr 11: Sanlitun'
-        };
-        document.getElementById('header-text').innerText = titles[tabId];
         document.querySelector('main').scrollTo(0,0);
     }
 </script>
