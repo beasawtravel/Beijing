@@ -83,10 +83,10 @@
         h3 { margin: 15px 0 8px; font-size: 18px; color: #45d921; text-decoration: underline; }
         p { font-size: 17px; line-height: 1.4; margin: 5px 0; }
 
-        .tag1 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #ffffff; background: #870314; margin: 8px 5px 0 0; } /* Yellow */
-		.tag2 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #000; background: #4aeff7; margin: 8px 5px 0 0; } /* Cyan */
-		.tag3 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #000; background: #FFD60A; margin: 8px 5px 0 0; } /* Red */
-		.tag4 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #000; background: #2bff44; margin: 8px 5px 0 0; } /* Green */
+        .tag1 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #ffffff; background: #870314; margin: 8px 5px 0 0; } /* Red - Snack */
+		.tag2 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #000; background: #4aeff7; margin: 8px 5px 0 0; } /* Cyan - Dining */
+		.tag3 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #000; background: #FFD60A; margin: 8px 5px 0 0; } /* Yellow - Shopping */
+		.tag4 { display: inline-block; padding: 3px 10px; border-radius: 18px; font-size: 15px; font-weight: bold; color: #000; background: #2bff44; margin: 8px 5px 0 0; } /* Green - Others */
         
         .gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
         .gallery-item { flex: 0 0 100px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
@@ -107,6 +107,7 @@
     <div class="nav-item" onclick="showTab('day5', this)"><i>⛩️</i><span>Apr 9</span></div>
     <div class="nav-item" onclick="showTab('day6', this)"><i>🐼</i><span>Apr 10</span></div>
     <div class="nav-item" onclick="showTab('day7', this)"><i>🛍️</i><span>Apr 11</span></div>
+	<div class="nav-item" onclick="showTab('day8', this)"><i>✈️</i><span>Apr 12</span></div>
 </nav>
 
 <main>
@@ -221,6 +222,22 @@
             </div>
         </div>
     </div>
+
+	    <div id="day8" class="tab-content">
+        <div class="card">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/8a/68/42/caption.jpg?w=800" class="card-img">
+            <div class="card-body">
+                <h2>Leaving for Airport</h2>
+                <p>Last chance for souvenirs</p>
+                <h3>🎁 Gifts</h3>
+                <div class="gallery">
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1516050748083-f03ee0bb22b1?w=200"><div class="gallery-label">Tea Sets</div></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1518173946684-3ee11bd75a75?w=200"><div class="gallery-label">Silk</div></div>
+                </div>
+                <a href="https://www.google.com/maps/search/Sanlitun" class="btn-nav">📍 Map: Sanlitun</a>
+            </div>
+        </div>
+    </div>
 </main>
 
 <script>
@@ -245,6 +262,7 @@
 </script>
 </body>
 </html>
+
 
 
 
