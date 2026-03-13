@@ -65,7 +65,7 @@
 
         .tab-content.active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* 24h Weather Widget */
+        /* 24h Weather Widget 
         .weather-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px dashed var(--border); }
         .weather-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .weather-scroll::-webkit-scrollbar { display: none; }
@@ -73,7 +73,8 @@
         .hour-time { font-size: 12px; color: var(--text-sub); }
         .hour-icon { font-size: 20px; margin: 4px 0; }
         .hour-temp { font-size: 15px; font-weight: 700; }
-
+		*/
+		
         /* Card Styles */
         .card { background: var(--card-bg); border-radius: 12px; margin-bottom: 25px; border: 2px solid var(--border); box-shadow: 6px 6px 0px rgba(0,0,0,0.4); overflow: hidden; }
         .card-img { width: 100%; height: 200px; object-fit: cover; }
@@ -138,11 +139,10 @@
             <img src="https://s28477.pcdn.co/wp-content/uploads/2017/12/PEK_1-984x554.jpg?w=800" class="card-img">
             <div class="card-body">
                 <h2>Arrival</h2>
-                <p>Landing at PEK Capital Airport. Didi to hotel for rest.</p>
                 <a href="https://surl.amap.com/1Fkmd1Y1r8Fs" class="btn-nav">📍 Map: Capital Airport</a>
-				<blank></blank>
-				<h2>Accommodation</h2>
-                <p>Name of Hotel</p>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
                 <a href="https://www.google.com/maps/search/Beijing+Hotel" class="btn-nav">📍 Map: Beijing Hotel</a>                
             </div>
         </div>
@@ -153,10 +153,11 @@
             <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800" class="card-img">
             <div class="card-body">
                 <h2>Great Wall</h2>
-                <p>Mutianyu section + Toboggan ride down!</p>
                 <a href="https://ditu.amap.com/place/B0FFGO6V8O" class="btn-nav">📍 Map: Great Wall</a>
-		<span class="tag1">🍴 Dining: Xinrongji</span>
-                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Xinrongji Dining</a>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
+				<a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Hotel</a>
             </div>
         </div>
     </div>
@@ -167,7 +168,7 @@
             <div class="card-body">
                 <h2>Forbidden City</h2>
                 <p>Imperial Palace</p>
-				<a href="https://www.google.com/maps/search/Forbidden+City" class="btn-nav">📍 Map: Palace</a>
+				<a href="https://www.google.com/maps/search/Forbidden+City" class="btn-nav">📍 Map: Imperial Palace</a>
 				<p>Jingshan Park</p>
 				<a href="https://www.google.com/maps/search/Forbidden+City" class="btn-nav">📍 Map: Jingshan Park</a>
 				<span class="tag2">🍢 Snacks: Tanghulu & Duck</span>	
@@ -175,6 +176,11 @@
                     <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=200"><div class="gallery-label">Tanghulu</div></div>
                     <div class="gallery-item"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?w=200"><div class="gallery-label">Duck</div></div>
                 </div>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Tanghulu & Duck</a>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
+				<a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Hotel</a>
             </div>
         </div>
     </div>
@@ -183,9 +189,12 @@
         <div class="card">
             <img src="https://chinaexplorertour.com/wp-content/uploads/2025/09/7be12e2582654afe9e421d792784f644-scaled.jpg?w=800" class="card-img">
             <div class="card-body">
-                <h2>Universal Studios</h2>
-                <p>Full day of movie magic and rides.</p>
-                <a href="https://www.google.com/maps/search/Universal+Studios+Beijing" class="btn-nav">📍 Map: Universal</a>
+                <h2>Universal Studios Beijing</h2>
+                <a href="https://www.google.com/maps/search/Universal+Studios+Beijing" class="btn-nav">📍 Map: Universal Studios</a>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
+				<a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Hotel</a>				
             </div>
         </div>
     </div>
@@ -195,8 +204,11 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Temple_of_Heaven_20160323_01.jpg?w=800" class="card-img">
             <div class="card-body">
                 <h2>Yi Wo Yuen Park</h2>
-                <p>Stroll and Easy Dinner</p>
                 <a href="https://www.google.com/maps/search/Temple+of+Heaven" class="btn-nav">📍 Map: Yiwoyuen Park</a>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
+				<a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Hotel</a>
             </div>
         </div>
     </div>
@@ -212,6 +224,10 @@
                 <a href="https://www.google.com/maps/search/Temple+of+Heaven" class="btn-nav">📍 Map: Tianjin Museum</a>
 				<p>Tianjin Eye Ferris Wheel</p>
                 <a href="https://www.google.com/maps/search/Beijing+Zoo+Panda" class="btn-nav">📍 Map: Tianjin Eye Ferris Wheel</a>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
+				<a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Hotel</a>
             </div>
         </div>
     </div>
@@ -226,7 +242,12 @@
                 <p>Porcelain House</p>
                 <a href="https://www.google.com/maps/search/Beijing+Zoo+Panda" class="btn-nav">📍 Map: Porcelain House</a>
 				<h2>Bullet-Train to Beijing</h2>
-				<span class="tag2">🍢 Snacks: 狗不理包</span>	
+				<span class="tag2">🍢 Snacks: 狗不理包</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: 狗不理包</a>
+				<span class="tag1">🍴 Dining</span>
+                <a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Dining</a>
+				<span class="tag4">❤️ Others: Hotel</span>	
+				<a href="https://www.google.com/maps/search/Xinrongji+Dining" class="btn-nav">📍 Map: Hotel</a>
             </div>
         </div>
     </div>
@@ -265,6 +286,7 @@
 </script>
 </body>
 </html>
+
 
 
 
