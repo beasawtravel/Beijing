@@ -73,6 +73,29 @@
         .hour-time { font-size: 12px; color: var(--text-sub); }
         .hour-icon { font-size: 20px; margin: 4px 0; }
         .hour-temp { font-size: 15px; font-weight: 700; }
+
+		
+<script>
+    // Build 24h weather
+    const scroll = document.getElementById('weatherScroll');
+    const icons = ['☀️', '🌤️', '☁️', '🌧️'];
+    for(let i=0; i<24; i++) {
+        const h = i % 12 || 12;
+        const ampm = i < 12 ? 'AM' : 'PM';
+        scroll.innerHTML += `<div class="hour-box"><div class="hour-time">${h}${ampm}</div><div class="hour-icon">${icons[i%4]}</div><div class="hour-temp">${15+(i%5)}°</div></div>`;
+    }
+
+    function showTab(tabId, element) {
+        document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display='none'; });
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        const target = document.getElementById(tabId);
+        target.style.display='block';
+        setTimeout(() => target.classList.add('active'), 10);
+        element.classList.add('active');
+        document.querySelector('main').scrollTo({top:0, behavior:'smooth'});
+    }
+</script>
+		
 		*/
 		
         /* Card Styles */
@@ -263,29 +286,9 @@
         </div>
     </div>
 </main>
-
-<script>
-    // Build 24h weather
-    const scroll = document.getElementById('weatherScroll');
-    const icons = ['☀️', '🌤️', '☁️', '🌧️'];
-    for(let i=0; i<24; i++) {
-        const h = i % 12 || 12;
-        const ampm = i < 12 ? 'AM' : 'PM';
-        scroll.innerHTML += `<div class="hour-box"><div class="hour-time">${h}${ampm}</div><div class="hour-icon">${icons[i%4]}</div><div class="hour-temp">${15+(i%5)}°</div></div>`;
-    }
-
-    function showTab(tabId, element) {
-        document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display='none'; });
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        const target = document.getElementById(tabId);
-        target.style.display='block';
-        setTimeout(() => target.classList.add('active'), 10);
-        element.classList.add('active');
-        document.querySelector('main').scrollTo({top:0, behavior:'smooth'});
-    }
-</script>
 </body>
 </html>
+
 
 
 
