@@ -82,7 +82,11 @@
         const ampm = i < 12 ? 'AM' : 'PM';
         scroll.innerHTML += `<div class="hour-box"><div class="hour-time">${h}${ampm}</div><div class="hour-icon">${icons[i%4]}</div><div class="hour-temp">${15+(i%5)}°</div></div>`;
     }
-
+		
+		<div class="weather-section">
+            <p style="margin:0 0 10px 0; font-size:16px;">☁️ 24h Beijing Forecast</p>
+            <div class="weather-scroll" id="weatherScroll"></div>
+        </div>
 		
 		*/
 		
@@ -125,10 +129,6 @@
 <main>
     <div id="info" class="tab-content active">
         <h2>Trip Overview</h2>
-        <div class="weather-section">
-            <p style="margin:0 0 10px 0; font-size:16px;">☁️ 24h Beijing Forecast</p>
-            <div class="weather-scroll" id="weatherScroll"></div>
-        </div>
         <div class="card">
             <div class="card-body">
                 <h3>✈️ Flights</h3>
