@@ -65,7 +65,7 @@
 
         .tab-content.active { display: block; opacity: 1; transform: translateY(0); }
 
-        /* 24h Weather Widget 
+        /* 24h Weather Widget 	*/
         .weather-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px dashed var(--border); }
         .weather-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .weather-scroll::-webkit-scrollbar { display: none; }
@@ -73,30 +73,6 @@
         .hour-time { font-size: 12px; color: var(--text-sub); }
         .hour-icon { font-size: 20px; margin: 4px 0; }
         .hour-temp { font-size: 15px; font-weight: 700; }
-
-		
-<script>
-    // Build 24h weather
-    const scroll = document.getElementById('weatherScroll');
-    const icons = ['☀️', '🌤️', '☁️', '🌧️'];
-    for(let i=0; i<24; i++) {
-        const h = i % 12 || 12;
-        const ampm = i < 12 ? 'AM' : 'PM';
-        scroll.innerHTML += `<div class="hour-box"><div class="hour-time">${h}${ampm}</div><div class="hour-icon">${icons[i%4]}</div><div class="hour-temp">${15+(i%5)}°</div></div>`;
-    }
-
-    function showTab(tabId, element) {
-        document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display='none'; });
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        const target = document.getElementById(tabId);
-        target.style.display='block';
-        setTimeout(() => target.classList.add('active'), 10);
-        element.classList.add('active');
-        document.querySelector('main').scrollTo({top:0, behavior:'smooth'});
-    }
-</script>
-		
-		*/
 		
         /* Card Styles */
         .card { background: var(--card-bg); border-radius: 12px; margin-bottom: 25px; border: 2px solid var(--border); box-shadow: 6px 6px 0px rgba(0,0,0,0.4); overflow: hidden; }
@@ -285,6 +261,26 @@
             </div>
         </div>
     </div>
+	<script>
+    // Build 24h weather
+    const scroll = document.getElementById('weatherScroll');
+    const icons = ['☀️', '🌤️', '☁️', '🌧️'];
+    for(let i=0; i<24; i++) {
+        const h = i % 12 || 12;
+        const ampm = i < 12 ? 'AM' : 'PM';
+        scroll.innerHTML += `<div class="hour-box"><div class="hour-time">${h}${ampm}</div><div class="hour-icon">${icons[i%4]}</div><div class="hour-temp">${15+(i%5)}°</div></div>`;
+    }
+
+    function showTab(tabId, element) {
+        document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display='none'; });
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        const target = document.getElementById(tabId);
+        target.style.display='block';
+        setTimeout(() => target.classList.add('active'), 10);
+        element.classList.add('active');
+        document.querySelector('main').scrollTo({top:0, behavior:'smooth'});
+    }
+</script>
 </main>
 </body>
 </html>
